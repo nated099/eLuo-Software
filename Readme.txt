@@ -13,7 +13,7 @@ Available Beta Features:
 
 
     Cleaning
-        Tune-up (Still in progress as well, however it performs a variety of maintenance tasks proven to help many struggling Windows Devices)
+        Tune-up (Still in progress as well, however it performs a variety of maintenance tasks proven to help many struggling Windows 		Devices)
         System Restore (Recommended and automatically selected with the tune-up process)
 
 
@@ -41,4 +41,4 @@ Recommended Use:
 
 
 
-More to be added to this site, and the application soon!
+More to be added to the site, and the application soon!
