@@ -1,4 +1,6 @@
-How to use (already deployed version):
+https://sites.google.com/view/eluo/
+
+How to use (deployed version):
 
 1) Double click the "eLuo Software.exe" application
 2) Click the "execute" button to run as an administrator
