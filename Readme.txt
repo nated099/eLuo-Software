@@ -1,9 +1,11 @@
-How to use:
+https://sites.google.com/view/eluo/
+
+How to use (deployed version):
 
 1) Double click the "eLuo Software.exe" application
 2) Click the "execute" button to run as an administrator
 3) Wait until Windows asks you for administrative privileges and respond "yes"
-4) Run any desired tasks when eLuo Software© restarts itself. You will see options available
+4) Run any desired tasks when eLuo SoftwareÂ© restarts itself. You will see options available
 	and no longer grayed out.
 5) Restart your computer after any tasks performed to ensure completion.
 6) Please leave feedback regarding your experience at https://sites.google.com/view/eluo/feedback
@@ -13,7 +15,7 @@ Available Beta Features:
 
 
     Cleaning
-        Tune-up (Still in progress as well, however it performs a variety of maintenance tasks proven to help many struggling Windows Devices)
+        Tune-up (Still in progress as well, however it performs a variety of maintenance tasks proven to help many struggling Windows 		Devices)
         System Restore (Recommended and automatically selected with the tune-up process)
 
 
@@ -41,4 +43,4 @@ Recommended Use:
 
 
 
-More to be added to this site, and the application soon!
+More to be added to the site, and the application soon!
