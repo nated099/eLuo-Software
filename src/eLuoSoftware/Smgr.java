@@ -10,7 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -47,7 +49,7 @@ public class Smgr
 	private JFrame frameeLuo;
 	private Thread cleaning;
 	private String welcome;
-
+	
 	private JTextPane licenseTextPane;
 	private JTextArea textArea;
 	private JButton assAss; 
@@ -72,6 +74,7 @@ public class Smgr
 	private JCheckBox wCbSkype;
 	private JCheckBox wCbNews;
 	private JCheckBox wCbOffice;
+	private JCheckBox wCbWup;
 	private JCheckBox wCbSolitaire;
 	private JCheckBox wCbStore;
 	private JCheckBox wCbUndo;
@@ -107,20 +110,16 @@ public class Smgr
 	protected Smgr() {
 		initialize();
 	}
-	
 	//Displays the GUI
 	protected void Display() {
 		frameeLuo.setVisible(true);
 	}
-	
-	
 	//gets the current directory that software is running from
-	
 	protected void initialize() 
 	{
 		if(admin == true) 
 		{
-			welcome = "*Administrative Privileges Detected*\r\nOS: "  + System.getProperty("os.name") + "\r\nVersion: " + System.getProperty("os.version") + "\r\nArchitecture: " + System.getProperty("os.arch") + "\r\n";
+			welcome = "*Administrative Privileges Detected*\r\nOS: "  + System.getProperty("os.name") + "\r\nVersion: " + System.getProperty("os.version") + "\r\nArchitecture: " + System.getProperty("os.arch") + "\r\n\r\nIt is recommended that you run a system restore before performing any task. This may be accomplished on the first (Cleaning) page.\r\n\r\n";
 		}
 		else
 			welcome = "Administrative Privileges NOT Detected, no tasks will be run until this is run as admin. \r\n\r\nJust hit execute to startup with privileges!";
@@ -256,159 +255,6 @@ public class Smgr
 		cwLayerPane.setBounds(0, 0, 480, 551);
 		Effect1.add(cwLayerPane);
 		
-		JPanel cleanLayerPanel = new JPanel();
-		cleanLayerPanel.setBounds(0, 0, 480, 140);
-		cwLayerPane.add(cleanLayerPanel);
-		cleanLayerPanel.setLayout(null);
-		cleanLayerPanel.setOpaque(false);
-		
-		
-		//TODO may remove this. Can possibly be used to perform ALL privacy actions. At this time not necessary.
-		chkbxWinPri = new JCheckBox("Windows Privacy Mode");
-		chkbxWinPri.setBounds(6, 111, 213, 23);
-		cleanLayerPanel.add(chkbxWinPri);
-		chkbxWinPri.setBackground(Color.GRAY);
-		chkbxWinPri.setVisible(false);
-		
-		chkbxWinIss = new JCheckBox("Fix Known Windows 10 Issues");
-		chkbxWinIss.setBounds(6, 85, 208, 23);
-		cleanLayerPanel.add(chkbxWinIss);
-		chkbxWinIss.setBackground(Color.GRAY);	
-		chkbxWinIss.setEnabled(false);
-		
-		chkbxTU = new JCheckBox("Tune Up");
-		chkbxTU.setBounds(6, 7, 173, 23);
-		cleanLayerPanel.add(chkbxTU);
-		chkbxTU.setBackground(Color.GRAY);
-		
-		chkbxDelBro = new JCheckBox("Delete Browser History");
-		chkbxDelBro.setBounds(6, 59, 208, 23);
-		cleanLayerPanel.add(chkbxDelBro);
-		chkbxDelBro.setBackground(Color.GRAY);
-		
-		chkbxRunVir = new JCheckBox("Run Virus Scanners");
-		chkbxRunVir.setBounds(6, 33, 213, 23);
-		cleanLayerPanel.add(chkbxRunVir);
-		chkbxRunVir.setBackground(Color.GRAY);
-		chkbxRunVir.setEnabled(false);
-		
-		chkbxRst = new JCheckBox("Create Restore Point");
-		chkbxRst.setBounds(6, 111, 213, 23);
-		cleanLayerPanel.add(chkbxRst);
-		chkbxRst.setBackground(Color.GRAY);
-		
-		chkbxUndoRest = new JCheckBox("Undo Last Operation");
-		chkbxUndoRest.setBounds(246, 7, 213, 23);
-		cleanLayerPanel.add(chkbxUndoRest);
-		chkbxUndoRest.setBackground(Color.GRAY);
-		
-		JPanel cwBtnPanel = new JPanel();
-		cwBtnPanel.setBounds(240, 97, 230, 39);
-		cleanLayerPanel.add(cwBtnPanel);
-		cwBtnPanel.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(192, 192, 192), new Color(64, 64, 64)), new CompoundBorder(new LineBorder(new Color(160, 160, 160)), new EmptyBorder(2, 2, 2, 2))));
-		cwBtnPanel.setBackground(Color.BLACK);
-		cwBtnPanel.setLayout(null);
-		
-		JPanel clnPanelBtnFrame = new JPanel();
-		clnPanelBtnFrame.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.BLACK, Color.LIGHT_GRAY, null, null));
-		clnPanelBtnFrame.setBounds(3, 3, 224, 33);
-		cwBtnPanel.add(clnPanelBtnFrame);
-		clnPanelBtnFrame.setBackground(Color.DARK_GRAY);
-		clnPanelBtnFrame.setLayout(null);
-		
-		btnExec = new JButton("Execute");
-		btnExec.setBounds(10, 5, 86, 23);
-		clnPanelBtnFrame.add(btnExec);
-		
-		btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(128, 5, 86, 23);
-		clnPanelBtnFrame.add(btnCancel);
-		
-		JPanel markerPanel = new JPanel();
-		markerPanel.setBounds(230, 40, 10, 10);
-		cleanLayerPanel.add(markerPanel);
-		markerPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
-		markerPanel.setBackground(Color.RED);
-		
-		btnExec.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				btnExecAction(arg0);
-			}
-		});
-		
-		btnCancel.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				btnCancAction(arg0);
-			}
-		});
-		
-		chkbxRst.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				if(chkbxRst.isSelected())
-					notice.Send("Restore Points will be enabled upon execution, if not already\r\nPlease ensure disk space is not full before proceeding");
-			}
-		});
-		
-		chkbxUndoRest.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				chkbxSel(arg0);
-			}
-		});
-		
-		chkbxTU.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				chkbxSel(arg0);
-			}
-		});
-		
-		chkbxWinPri.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				chkbxSel(arg0);
-			}
-		});
-		
-		chkbxWinIss.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				chkbxSel(arg0);
-			}
-		});
-		
-		chkbxDelBro.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				chkbxSel(arg0);
-			}
-		});
-		
-		chkbxRunVir.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				chkbxSel(arg0);
-			}
-		});
-		
-		//TODO get these working so they can be enabled again 
-		chkbxUndoRest.setEnabled(false);
-		chkbxDelBro.setEnabled(false);
-		//chkbxWinIss.setEnabled(false);
-		chkbxWinPri.setEnabled(false);
-		
 		JPanel wILayerPanel = new JPanel();
 		wILayerPanel.setBounds(0, 0, 480, 140);
 		cwLayerPane.add(wILayerPanel);
@@ -447,7 +293,7 @@ public class Smgr
 		wCbCortana = new JCheckBox("Cortana");
 		//wCbCortana.setEnabled(false);
 		wCbCortana.setBackground(Color.GRAY);
-		wCbCortana.setBounds(240, 33, 116, 23);
+		wCbCortana.setBounds(124, 111, 116, 23);
 		wILayerPanel.add(wCbCortana);
 		
 		wCbSkype = new JCheckBox("Skype");
@@ -460,14 +306,19 @@ public class Smgr
 		wCbNews.setBounds(124, 59, 116, 23);
 		wILayerPanel.add(wCbNews);
 		
-		wCbOffice = new JCheckBox("\"Get Office\"");
+		wCbOffice = new JCheckBox("Get Office");
 		wCbOffice.setBackground(Color.GRAY);
 		wCbOffice.setBounds(124, 85, 116, 23);
 		wILayerPanel.add(wCbOffice);
 		
+		wCbWup = new JCheckBox("Windows Updates");
+		wCbWup.setBackground(Color.GRAY);
+		wCbWup.setBounds(240, 33, 232, 23);
+		wILayerPanel.add(wCbWup);
+		
 		wCbSolitaire = new JCheckBox("Microsoft Solitaire Collection");
 		wCbSolitaire.setBackground(Color.GRAY);
-		wCbSolitaire.setBounds(240, 7, 186, 23);
+		wCbSolitaire.setBounds(240, 7, 234, 23);
 		wILayerPanel.add(wCbSolitaire);
 		
 		wCbStore = new JCheckBox("Windows Store");
@@ -479,55 +330,6 @@ public class Smgr
 		wCbUndo.setBackground(Color.GRAY);
 		wCbUndo.setBounds(240, 59, 116, 23);
 		wILayerPanel.add(wCbUndo);
-		
-		JPanel privLayerPanel = new JPanel();
-		privLayerPanel.setBounds(0, 0, 480, 140);
-		cwLayerPane.add(privLayerPanel);
-		privLayerPanel.setLayout(null);
-		privLayerPanel.setBorder(null);
-		privLayerPanel.setBackground(Color.GRAY);
-		privLayerPanel.setVisible(false);
-		privLayerPanel.setOpaque(false);
-		
-		chkbxWTelem = new JCheckBox("Windows Telemetry");
-		chkbxWTelem.setBounds(6, 111, 213, 23);
-		privLayerPanel.add(chkbxWTelem);
-		chkbxWTelem.setBackground(Color.GRAY);
-		
-		chkbxWSync = new JCheckBox("Windows Sync");
-		chkbxWSync.setBounds(6, 85, 208, 23);
-		privLayerPanel.add(chkbxWSync);
-		chkbxWSync.setBackground(Color.GRAY);		
-		
-		chkbxWAdInf = new JCheckBox("Advertising Information");
-		chkbxWAdInf.setBounds(6, 7, 173, 23);
-		privLayerPanel.add(chkbxWAdInf);
-		chkbxWAdInf.setBackground(Color.GRAY);
-		
-		chkbxWWebCont = new JCheckBox("Web Content Evaluation");
-		chkbxWWebCont.setBounds(6, 59, 208, 23);
-		privLayerPanel.add(chkbxWWebCont);
-		chkbxWWebCont.setBackground(Color.GRAY);
-		
-		chkbxSsd = new JCheckBox("Smart Screen Data");
-		chkbxSsd.setBounds(246, 59, 213, 23);
-		privLayerPanel.add(chkbxSsd);
-		chkbxSsd.setBackground(Color.GRAY);
-		
-		chkbxBSearch = new JCheckBox("Bing Search");
-		chkbxBSearch.setBounds(6, 33, 213, 23);
-		privLayerPanel.add(chkbxBSearch);
-		chkbxBSearch.setBackground(Color.GRAY);
-		
-		chkbxWifiSense = new JCheckBox("WiFi Hotspot Sense");
-		chkbxWifiSense.setBounds(246, 7, 213, 23);
-		privLayerPanel.add(chkbxWifiSense);
-		chkbxWifiSense.setBackground(Color.GRAY);
-		
-		chkbxPTP = new JCheckBox("P2P Update Downloads");
-		chkbxPTP.setBounds(246, 33, 213, 23);
-		privLayerPanel.add(chkbxPTP);
-		chkbxPTP.setBackground(Color.GRAY);
 		
 		wCbGetStarted.addActionListener(new ActionListener() 
 		{
@@ -609,6 +411,14 @@ public class Smgr
 			}
 		});
 		
+		wCbWup.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
 		wCbStore.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -624,6 +434,211 @@ public class Smgr
 				chkbxSel(arg0);
 			}
 		});
+		
+		JPanel cleanLayerPanel = new JPanel();
+		cleanLayerPanel.setBounds(0, 0, 480, 140);
+		cwLayerPane.add(cleanLayerPanel);
+		cleanLayerPanel.setLayout(null);
+		cleanLayerPanel.setOpaque(false);
+		
+		
+		//TODO may remove this. Can possibly be used to perform ALL privacy actions. At this time not necessary.
+		chkbxWinPri = new JCheckBox("Windows Privacy Mode");
+		chkbxWinPri.setBounds(6, 111, 213, 23);
+		cleanLayerPanel.add(chkbxWinPri);
+		chkbxWinPri.setBackground(Color.GRAY);
+		chkbxWinPri.setVisible(false);
+		
+		chkbxWinIss = new JCheckBox("Fix Known Windows 10 Issues");
+		chkbxWinIss.setBounds(6, 85, 208, 23);
+		cleanLayerPanel.add(chkbxWinIss);
+		chkbxWinIss.setBackground(Color.GRAY);	
+		chkbxWinIss.setEnabled(false);
+		
+		chkbxTU = new JCheckBox("Tune Up");
+		chkbxTU.setBounds(6, 7, 173, 23);
+		cleanLayerPanel.add(chkbxTU);
+		chkbxTU.setBackground(Color.GRAY);
+		
+		chkbxDelBro = new JCheckBox("Delete Browser History");
+		chkbxDelBro.setBounds(6, 59, 208, 23);
+		cleanLayerPanel.add(chkbxDelBro);
+		chkbxDelBro.setBackground(Color.GRAY);
+		
+		chkbxRunVir = new JCheckBox("Run Virus Scanners");
+		chkbxRunVir.setBounds(6, 33, 213, 23);
+		cleanLayerPanel.add(chkbxRunVir);
+		chkbxRunVir.setBackground(Color.GRAY);
+		chkbxRunVir.setEnabled(false);
+		
+		chkbxRst = new JCheckBox("Create Restore Point");
+		chkbxRst.setBounds(6, 111, 213, 23);
+		cleanLayerPanel.add(chkbxRst);
+		chkbxRst.setBackground(Color.GRAY);
+		
+		chkbxUndoRest = new JCheckBox("Undo Last Operation");
+		chkbxUndoRest.setBounds(246, 7, 213, 23);
+		cleanLayerPanel.add(chkbxUndoRest);
+		chkbxUndoRest.setBackground(Color.GRAY);
+		
+		JPanel cwBtnPanel = new JPanel();
+		cwBtnPanel.setBounds(240, 97, 230, 39);
+		cleanLayerPanel.add(cwBtnPanel);
+		cwBtnPanel.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(192, 192, 192), new Color(64, 64, 64)), new CompoundBorder(new LineBorder(new Color(160, 160, 160)), new EmptyBorder(2, 2, 2, 2))));
+		cwBtnPanel.setBackground(Color.BLACK);
+		cwBtnPanel.setLayout(null);
+		
+		JPanel clnPanelBtnFrame = new JPanel();
+		clnPanelBtnFrame.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.BLACK, Color.LIGHT_GRAY, null, null));
+		clnPanelBtnFrame.setBounds(3, 3, 224, 33);
+		cwBtnPanel.add(clnPanelBtnFrame);
+		clnPanelBtnFrame.setBackground(Color.DARK_GRAY);
+		clnPanelBtnFrame.setLayout(null);
+		
+		btnExec = new JButton("Execute");
+		btnExec.setBounds(10, 5, 86, 23);
+		clnPanelBtnFrame.add(btnExec);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(128, 5, 86, 23);
+		clnPanelBtnFrame.add(btnCancel);
+		
+		JPanel markerPanel = new JPanel();
+		markerPanel.setBounds(230, 14, 10, 10);
+		cleanLayerPanel.add(markerPanel);
+		markerPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		markerPanel.setBackground(Color.RED);
+		
+
+		//TODO get these working so they can be enabled again 
+		//chkbxUndoRest.setEnabled(false);
+		chkbxDelBro.setEnabled(false);
+		//chkbxWinIss.setEnabled(false);
+		chkbxWinPri.setEnabled(false);
+		
+		JPanel privLayerPanel = new JPanel();
+		privLayerPanel.setBounds(0, 0, 480, 140);
+		cwLayerPane.add(privLayerPanel);
+		privLayerPanel.setLayout(null);
+		privLayerPanel.setBorder(null);
+		privLayerPanel.setBackground(Color.GRAY);
+		privLayerPanel.setVisible(false);
+		privLayerPanel.setOpaque(false);
+	
+		btnExec.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				btnExecAction(arg0);
+			}
+		});
+		
+		btnCancel.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				btnCancAction(arg0);
+			}
+		});
+		
+		chkbxRst.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(chkbxRst.isSelected())
+					notice.Send("Restore Points will be enabled upon execution, if not already\r\nPlease ensure disk space is not full before proceeding");
+			}
+		});
+		
+		chkbxUndoRest.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
+		chkbxTU.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
+		chkbxWinPri.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
+		chkbxWinIss.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
+		chkbxDelBro.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
+		chkbxRunVir.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				chkbxSel(arg0);
+			}
+		});
+		
+		
+		chkbxWTelem = new JCheckBox("Windows Telemetry");
+		chkbxWTelem.setBounds(6, 111, 213, 23);
+		privLayerPanel.add(chkbxWTelem);
+		chkbxWTelem.setBackground(Color.GRAY);
+		
+		chkbxWSync = new JCheckBox("Windows Sync");
+		chkbxWSync.setBounds(6, 85, 208, 23);
+		privLayerPanel.add(chkbxWSync);
+		chkbxWSync.setBackground(Color.GRAY);	
+		chkbxWSync.setEnabled(false);
+		
+		chkbxWAdInf = new JCheckBox("Advertising Information");
+		chkbxWAdInf.setBounds(6, 7, 173, 23);
+		privLayerPanel.add(chkbxWAdInf);
+		chkbxWAdInf.setBackground(Color.GRAY);
+		
+		chkbxWWebCont = new JCheckBox("Web Content Evaluation");
+		chkbxWWebCont.setBounds(6, 59, 208, 23);
+		privLayerPanel.add(chkbxWWebCont);
+		chkbxWWebCont.setBackground(Color.GRAY);
+		
+		chkbxSsd = new JCheckBox("Smart Screen Data");
+		chkbxSsd.setBounds(246, 59, 213, 23);
+		privLayerPanel.add(chkbxSsd);
+		chkbxSsd.setBackground(Color.GRAY);
+		
+		chkbxBSearch = new JCheckBox("Bing Search");
+		chkbxBSearch.setBounds(6, 33, 213, 23);
+		privLayerPanel.add(chkbxBSearch);
+		chkbxBSearch.setBackground(Color.GRAY);
+		
+		chkbxWifiSense = new JCheckBox("WiFi Hotspot Sense");
+		chkbxWifiSense.setBounds(246, 7, 213, 23);
+		privLayerPanel.add(chkbxWifiSense);
+		chkbxWifiSense.setBackground(Color.GRAY);
+		
+		chkbxPTP = new JCheckBox("P2P Update Downloads");
+		chkbxPTP.setBounds(246, 33, 213, 23);
+		privLayerPanel.add(chkbxPTP);
+		chkbxPTP.setBackground(Color.GRAY);
 		
 		CardLayout panelPgLayout = (CardLayout) panelPages.getLayout();
 				
@@ -797,10 +812,164 @@ public class Smgr
 		frameeLuo.getContentPane().add(renoPic);
 		renoPic.setIcon(pic);
 		
-		
-		//TODO check action listeners for all chkboxes to chkbxSel and delegate actions
 	}
-
+	private void uncheck() {
+		wCbGetStarted.setSelected(false);
+		wCbGroove.setSelected(false);
+		wCbSports.setSelected(false);
+		wCbWeather.setSelected(false);
+		wCbXbx.setSelected(false);
+		wCbCortana.setSelected(false);
+		wCbSkype.setSelected(false);
+		wCbNews.setSelected(false);
+		wCbOffice.setSelected(false);
+		wCbSolitaire.setSelected(false);
+		wCbWup.setSelected(false);
+		wCbStore.setSelected(false);
+		wCbUndo.setSelected(false);
+		chkbxTU.setSelected(false);
+		chkbxWinIss.setSelected(false);
+		chkbxDelBro.setSelected(false);
+		chkbxWinPri.setSelected(false);
+		chkbxRunVir.setSelected(false);
+		chkbxRst.setSelected(false);
+		chkbxUndoRest.setSelected(false);
+		chkbxPTP.setSelected(false);
+		chkbxWifiSense.setSelected(false);
+		chkbxBSearch.setSelected(false);
+		chkbxWWebCont.setSelected(false);
+		chkbxWAdInf.setSelected(false);
+		chkbxWSync.setSelected(false);
+		chkbxWTelem.setSelected(false);
+		chkbxSsd.setSelected(false);
+	}
+	private ArrayList<String> isSelected() {
+		ArrayList<String> list = new ArrayList<String>();
+		switch(task) {
+		case WINISS:
+			if(wCbGetStarted.isSelected())  //1
+			{
+				list.add("wCbGetStarted");
+			}
+			if(wCbGroove.isSelected())//2
+			{
+				list.add("wCbGroove");
+			}
+			if(wCbSports.isSelected())//3
+			{
+				list.add("wCbSports");
+			}
+			
+			if(wCbWeather.isSelected())//4
+			{
+				list.add("wCbWeather");
+			}
+			
+			if(wCbXbx.isSelected())//5
+			{
+				list.add("wCbXbx");
+			}
+			
+			if(wCbCortana.isSelected())//6
+			{
+				list.add("wCbCortana");
+			}
+			
+			if(wCbSkype.isSelected())//7
+			{
+				list.add("wCbSkype");
+			}
+			
+			if(wCbNews.isSelected())//8
+			{
+				list.add("wCbNews");
+			}
+			
+			if(wCbOffice.isSelected())//9
+			{
+				list.add("wCbOffice");
+			}
+			
+			if(wCbSolitaire.isSelected())//10
+			{
+				list.add("wCbSolitaire");
+			}
+			
+			if(wCbStore.isSelected())//11
+			{
+				list.add("wCbStore");
+			}
+			if(wCbWup.isSelected()) //12
+			{
+				list.add("wCbWup");
+			}
+			if(wCbUndo.isSelected()) //13
+			{
+				list.add("wCbUndo");
+			}
+			break;
+			
+		case CLEANING:
+			
+			if(chkbxRst.isSelected()) {//1
+				list.add("chkbxRst");
+									}
+			if(chkbxRunVir.isSelected()) { 
+				list.add("chkbxRunVir");
+			}
+			if(chkbxWinIss.isSelected()) { 
+				list.add("chkbxWinIss");
+			}
+			if(chkbxDelBro.isSelected()) { 
+				list.add("chkbxDelBro");
+			}
+			if(chkbxWinPri.isSelected()) { 
+				list.add("chkbxWinPri");
+			}
+			if(chkbxTU.isSelected()) { 
+				list.add("chkbxTU");
+			}
+			if(chkbxUndoRest.isSelected()) {
+				list.add("chkbxUndoRest");
+			}
+			break;
+		case PRIVACY:
+			if(chkbxPTP.isSelected()) { //1
+				list.add("chkbxPTP");
+			}
+			if(chkbxWifiSense.isSelected()) { //2
+				list.add("chkbxWifiSense");
+			}
+			if(chkbxBSearch.isSelected()) { //3
+				list.add("chkbxBSearch");
+			}
+			if(chkbxWWebCont.isSelected()) { //4 
+				list.add("chkbxWWebCont");
+			}
+			if(chkbxWAdInf.isSelected()) { //5
+				list.add("chkbxWAdInf");
+			}
+			if(chkbxWSync.isSelected()) {//6
+				list.add("chkbxWSync");
+			}
+			if(chkbxWTelem.isSelected()) {//7
+				list.add("chkbxWTelem");
+			}
+			if(chkbxSsd.isSelected()) {//8
+				list.add("chkbxSsd");
+			}
+			break;
+		case ABOUT:
+			break;
+			
+		case ASSESS:
+			break;
+			
+		case NETMON:
+			break;
+		}
+		return list;
+	}
 	private void btnCancAction(java.awt.event.ActionEvent evt) 
 	{	//action when cancel occurs
 		if(cleaning.isAlive()) {
@@ -820,6 +989,9 @@ public class Smgr
 	}
 	private void chkbxSel(java.awt.event.ActionEvent evt) 
 	{
+		/*
+		 * Cleans up other pages (unchecks)
+		 */
 		
 		switch(task) {
 			case ABOUT:
@@ -832,10 +1004,6 @@ public class Smgr
 				break;
 				
 			case PRIVACY:
-
-				/*
-				 * Cleanup other pages (uncheck)
-				 */
 				
 				wCbGetStarted.setSelected(false);
 				wCbGroove.setSelected(false);
@@ -847,6 +1015,7 @@ public class Smgr
 				wCbNews.setSelected(false);
 				wCbOffice.setSelected(false);
 				wCbSolitaire.setSelected(false);
+				wCbWup.setSelected(false);
 				wCbStore.setSelected(false);
 				wCbUndo.setSelected(false);
 				chkbxTU.setSelected(false);
@@ -867,11 +1036,7 @@ public class Smgr
 				break;
 				
 			case CLEANING:
-				
-				/*
-				 * Cleanup other pages (uncheck)
-				 */
-				
+								
 				wCbGetStarted.setSelected(false);
 				wCbGroove.setSelected(false);
 				wCbSports.setSelected(false);
@@ -883,6 +1048,7 @@ public class Smgr
 				wCbOffice.setSelected(false);
 				wCbSolitaire.setSelected(false);
 				wCbStore.setSelected(false);
+				wCbWup.setSelected(false);
 				wCbUndo.setSelected(false);
 				
 				chkbxPTP.setSelected(false);
@@ -925,7 +1091,7 @@ public class Smgr
 					//chkbxDelBro.setEnabled(true);
 					chkbxWinPri.setEnabled(true);
 					//chkbxRunVir.setEnabled(true);
-					//chkbxRst.setEnabled(true);
+					chkbxRst.setEnabled(true);
 				}
 				
 				//Auto-select system restore when critical processes are run
@@ -936,9 +1102,7 @@ public class Smgr
 				break;
 				
 			case WINISS:
-				/*
-				 * Cleanup other pages (uncheck)
-				 */
+
 				chkbxTU.setSelected(false);
 				chkbxWinIss.setSelected(false);
 				chkbxDelBro.setSelected(false);
@@ -957,7 +1121,7 @@ public class Smgr
 				chkbxSsd.setSelected(false);
 				
 				//when nothing is selected display welcome
-				if(!(wCbGetStarted.isSelected()) && !(wCbGroove.isSelected()) && !(wCbSports.isSelected()) && !(wCbWeather.isSelected()) && !(wCbXbx.isSelected()) && !(wCbCortana.isSelected()) && !(wCbSkype.isSelected()) && !(wCbNews.isSelected())	&& !(wCbOffice.isSelected()) && !(wCbSolitaire.isSelected()) && !(wCbStore.isSelected()) && !(wCbUndo.isSelected())) 
+				if(!(wCbGetStarted.isSelected()) && !(wCbGroove.isSelected()) && !(wCbSports.isSelected()) && !(wCbWeather.isSelected()) && !(wCbXbx.isSelected()) && !(wCbCortana.isSelected()) && !(wCbSkype.isSelected()) && !(wCbNews.isSelected())	&& !(wCbOffice.isSelected()) && !(wCbSolitaire.isSelected()) && !(wCbWup.isSelected())&& !(wCbStore.isSelected()) && !(wCbUndo.isSelected())) 
 				{
 					consoleBox.setText(welcome);
 					//erases the used buffer
@@ -989,7 +1153,9 @@ public class Smgr
 					wCbOffice.setSelected(false);
 					wCbOffice.setEnabled(false);
 					wCbSolitaire.setSelected(false);
-					wCbSolitaire.setEnabled(false);
+					wCbSolitaire.setEnabled(false); 
+					wCbWup.setSelected(false);
+					wCbWup.setEnabled(false);
 					wCbStore.setSelected(false);
 					wCbStore.setEnabled(false);
 
@@ -1007,6 +1173,7 @@ public class Smgr
 					wCbNews.setEnabled(true);
 					wCbOffice.setEnabled(true);
 					wCbSolitaire.setEnabled(true);
+					wCbWup.setEnabled(true);
 					wCbStore.setEnabled(true);
 				}
 				break;
@@ -1016,158 +1183,19 @@ public class Smgr
 	}
 	private void btnExecAction(java.awt.event.ActionEvent evt)
 	{
-		float i=0;		
 		progressBar.setValue(0);
 		consoleBox.setText(welcome);	
-		cbId = new StringBuilder();
+		cleaning = new Thread(t);
+		t.task(isSelected());
 		
 		switch(task) {
 			case WINISS:
-				//When on the windows issues page
-				if(wCbCortana.isSelected() && wCbGetStarted.isSelected() && wCbGroove.isSelected() && wCbNews.isSelected() && wCbOffice.isSelected() && wCbSkype.isSelected() && wCbSolitaire.isSelected() && wCbSports.isSelected() && wCbStore.isSelected() && wCbWeather.isSelected() && wCbXbx.isSelected()) 
-				{
-					cbId.append("1.01 1.02 1.03 1.04 1.05 1.06 1.07 1.08 1.09 1.1");
-				}
-				else if(!(wCbCortana.isSelected()) && !(wCbGetStarted.isSelected()) && !(wCbGroove.isSelected()) && !(wCbNews.isSelected()) && !(wCbOffice.isSelected()) && !(wCbSkype.isSelected()) && !(wCbSolitaire.isSelected()) && !(wCbSports.isSelected()) && !(wCbStore.isSelected()) && !(wCbWeather.isSelected()) && !(wCbXbx.isSelected())) 
-				{
-					cbId.append("0");
-				}
-				else
-				{
-					i=1;
-					i+=.01;
-					if(wCbGetStarted.isSelected())
-					{
-						cbId.append(i);
-					}
-					i+=.01;
-					if(wCbGroove.isSelected())
-					{
-						cbId.append(i);
-					}
-					i+=.01;
-					if(wCbSports.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbWeather.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbXbx.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbCortana.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbSkype.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbNews.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbOffice.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbSolitaire.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbStore.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					i+=.01;
-					if(wCbUndo.isSelected())
-					{
-						cbId.append(i);
-					}
-					
-					//TODO perhaps making the taskable object more appropriate so we're not calling the same one that's already instantiated (difficulty is accessing consoleBox)
-					cleaning = new Thread(t);
-					t.task(cbId.toString());
-					cleaning.setName("WinRmv");
-					cleaning.start();
-					//Owned by Smgr class, not this event instance caused by clicking exec button, so needs to be cleared.
-					cbId = new StringBuilder();
-					break;
-				}
+	
+				cleaning.setName("WinRmv");
+				break;
 				
 			case CLEANING:
-				//New checkbox items must be added here(cleaning page)
-				/*if(chkbxWinIss.isSelected() && chkbxTU.isSelected() && chkbxDelBro.isSelected() && chkbxRunVir.isSelected() && chkbxWinPri.isSelected() && chkbxRst.isSelected()) 
-				{
-					cbId.append("123456");
-				}*/
-				
-				//New checkbox items must be added here(cleaning page)
-				/*else*/ if(!(chkbxWinIss.isSelected()) && !(chkbxTU.isSelected()) && !(chkbxDelBro.isSelected()) && !(chkbxRunVir.isSelected()) && !(chkbxWinPri.isSelected()) && !(chkbxRst.isSelected()) && !(chkbxUndoRest.isSelected())) 
-				{
-					cbId.append("0");
-				}
-				
-				else 
-				{
-					i++;
-					if(chkbxRunVir.isSelected()) {
-						cbId.append(i);
-					}
-					i++;
-					if(chkbxWinIss.isSelected()) {
-						cbId.append(i);
-					}
-					i++;
-					if(chkbxDelBro.isSelected()) {
-						cbId.append(i);
-					}
-					i++;
-					if(chkbxWinPri.isSelected()) {
-						cbId.append(i);
-					}
-					i++;
-					if(chkbxTU.isSelected()) {
-						cbId.append(i);
-					}
-					i++;
-					if(chkbxRst.isSelected()) {//6
-						cbId.append(i);
-						//TODO add Dialog Popup notifying user that System Restore will be enabled if disabled. Also make sure to add enabling script.
-					}
-					i++;
-					if(chkbxUndoRest.isSelected()) {//7
-						cbId.append(i);
-					}
-					
-				}
-				//TODO perhaps making the taskable object more appropriate so we're not calling the same one that's already instantiated (difficulty is accessing consoleBox)
-				cleaning = new Thread(t);
-				t.task(cbId.toString());
 				cleaning.setName("Cleaning");
-				cleaning.start();
-				//Owned by Smgr class, not this event instance caused by clicking exec button, so needs to be cleared.
-				cbId = new StringBuilder();
 				break;
 				
 			case ABOUT:
@@ -1180,75 +1208,19 @@ public class Smgr
 				break;
 				
 			case PRIVACY:
-				
-				//New checkbox items must be added here(cleaning page)
-				/*else*/ if(!(chkbxSsd.isSelected()) && !(chkbxPTP.isSelected()) && !(chkbxWifiSense.isSelected()) && !(chkbxBSearch.isSelected()) && !(chkbxWWebCont.isSelected()) && !(chkbxWAdInf.isSelected()) && !(chkbxWSync.isSelected()) && !(chkbxWTelem.isSelected())) 
-				{
-					cbId.append("0");
-				}
-				
-				else 
-				{
-					i=2;
-					i+=.01;
-					if(chkbxPTP.isSelected()) { //1
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxWifiSense.isSelected()) { //2
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxBSearch.isSelected()) { //3
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxWWebCont.isSelected()) { //4 
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxWAdInf.isSelected()) { //5
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxWSync.isSelected()) {//6
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxWTelem.isSelected()) {//7
-						cbId.append(i);
-					}
-					i+=.01;
-					if(chkbxSsd.isSelected()) {//8
-						cbId.append(i);
-					}
-					
-				}
-				//TODO perhaps making the taskable object more appropriate so we're not calling the same one that's already instantiated (difficulty is accessing consoleBox)
-				cleaning = new Thread(t);
-				t.task(cbId.toString());
 				cleaning.setName("Privacy");
-				cleaning.start();
-				//Owned by Smgr class, not this event instance caused by clicking exec button, so needs to be cleared.
-				cbId = new StringBuilder();
 				break;
-				
 		}
-				
+		cleaning.start();
 	}
-
-	
-	
 	Taskable t = new Taskable() 
 	{	
-		
 		@Override
 		public void run()
 		{
 			/*
 			 * Thread Initialization tasks
 			 */
-			
 			btnExec.setVisible(false);
 			if(admin == false && !(batch.exists()))
 			{
@@ -1258,12 +1230,11 @@ public class Smgr
 			
 			else if(admin == false) 
 			{
-				this.commands[0] = "admin.bat";
-				this.i=1;
+				commands.put(0, new String[] {"admin.bat"});
 			}
-			else if(i==0) 
+			else if(tasks.size() == 0) 
 			{
-				consoleBox.append("Choose an option to continue");
+				consoleBox.append("Choose an option to continue\r\n");
 				btnExec.setVisible(true);
 			}
 			if(x==0 && admin == true) 
@@ -1271,8 +1242,9 @@ public class Smgr
 				progressString = welcome;
 				writeLog();
 			}
-			prog = (float) 100 / this.runNum;
+			prog = (float) 100 / runNum;
 			
+			//When the process starts, disable other buttons
 			switch(task) {
 				case CLEANING:
 					btnAssess.setEnabled(false);
@@ -1296,29 +1268,55 @@ public class Smgr
 					btnCleaning.setEnabled(false);
 					btnAbout.setEnabled(false);
 					btnAssess.setEnabled(false);
-					btnWinFix.setEnabled(false);
-					
-					
+					btnWinFix.setEnabled(false);					
 					break;
 			}
-			//'try', is placed specifically for the finally portion run after/instead of this block
+			
 			try 
+			{ 
+			if(admin == true)
+			if(tasks.get(i).equals("chkbxUndoRest"))
 			{
-				if(i==0)
 				try (InputStream iS = this.cmd.Send("Get-ComputerRestorePoint"))
 				{
 					try (BufferedReader line = new BufferedReader(new InputStreamReader(iS)))
 					{
 						//TODO filter restore points to find single 
+						while (!Thread.currentThread().isInterrupted()) 
+						{
+							if((restoreId = msgCntrl.Restore(line.readLine())) != 0) {
+								System.out.println("InputStream Available Memory: " + iS.available()); 
+								count++;
+								progressString = msgCntrl.Ret()+ "\r\n Count: "+ count + " Prog#: " + prog + "restoreId " +restoreId+ "\r\n" + sdf.format(new Date());
+								consoleBox.append(restoreId +" Found restore id! Restoring computer to this time.");
+								
+								this.cmd.Send("restore-computer -restorepoint " + restoreId);
+								break;
+							}
+							else {
+								System.out.println("InputStream Available Memory: " + iS.available()); 
+							count++;
+							progressString = msgCntrl.Ret()+ "\r\n Count: "+ count + " Prog#: " + prog + "\r\n" + sdf.format(new Date());
+							}
+							writeLog();
+						}
+						
+						iS.close();
+						line.close();
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
+				} catch (NullPointerException n1) {
+					n1.printStackTrace();
+					consoleBox.append("Restore point was not created or was removed.");
 				}
+			}
 				
-				for(x = 0; x < i; x++) 
+				for(x = 0; x < commands.size(); x++) 
 				{	//each time line.readline() is used it runs a line through, even in a conditional statement or debug expression
-					
-					try (InputStream iS = this.cmd.Send(this.commands[x]))
+					//commands is a hashtable that returns a string array of tasks to run
+					for(int z = 0; z < commands.get(x).length; z++)
+					try (InputStream iS = this.cmd.Send(commands.get(x)[z]))
 					//InputStream iS = this.commands[0] == "admin.bat" ? this.AdminUp() : (this.cmd.Send(this.commands[x]))
 					{
 						try (BufferedReader line = new BufferedReader(new InputStreamReader(iS)))
@@ -1326,14 +1324,14 @@ public class Smgr
 							//while loop runs until each command is finished
 							while (!Thread.currentThread().isInterrupted()) 
 							{
-								msgCntrl.Checker(line.readLine(), x, this.commands[x]);
-								System.out.println(iS.available()); //TODO logwriter here instead use lambda in string
+								msgCntrl.Checker(line.readLine(), x, commands.get(x)[z]);
+								System.out.println("InputStream Available Memory: " + iS.available());  //TODO logwriter here instead use lambda in string
 								count++;
-								progressString = commands[x] + " " + msgCntrl.Ret()+ "\r\n Count: "+ count + " Prog#: " + prog + "\r\n" + sdf.format(new Date());;
+								progressString = commands.get(x)[z] + " " + msgCntrl.Ret()+ "\r\n Count: "+ count + " Prog#: " + prog + "\r\n" + sdf.format(new Date());;
 								
 								if (msgCntrl.Ret() != null && msgCntrl.Ret() != "break") 
 								{
-									if(commands[x].indexOf("typeperf") !=-1) 
+									if(commands.get(x)[z].indexOf("typeperf") !=-1) 
 									{
 										if(!(analysis.Build(msgCntrl.Ret()).equals(msgCntrl.Ret()))) {
 											consoleBox.append(analysis.Build(msgCntrl.Ret()) + "\r\n");
@@ -1344,14 +1342,14 @@ public class Smgr
 									else {
 										writeLog();
 										consoleBox.append(msgCntrl.Ret() + "\r\n");
-							    		System.out.println(progressString); //TODO create progressString tasks
+							    		System.out.println("Progress: " + progressString); //TODO create progressString tasks
 										}
 							    }
 									
 							    else if(msgCntrl.Ret() == null)
 							    {
 							    	writeLog();
-							    	System.out.println(progressString);
+							    	System.out.println("null was returned");
 							        if(iS.available() == -1) {
 							        	break;
 							        }
@@ -1378,23 +1376,12 @@ public class Smgr
 							count++;
 							
 						}
-						/*catch (NullPointerException e) 
-						{
-							if(admin == true) {
-								writeLog(e.toString());
-								progressBar.setValue((int) (count * prog));
-								count++;
-							}
-							//e.printStackTrace();
-							System.out.println("NULLPTRERR:" + this.commands[x] +"\r\n");
-							throw e;
-						}*/
-						
 						finally 
 						{
 							try
 							{
 								iS.close();
+								
 								continue;
 							}
 							catch(IOException e)
@@ -1459,8 +1446,8 @@ public class Smgr
 				}*/
 				if(x<(i-1))
 				{				
-					consoleBox.append("It appears we had to terminate early, "+ x +" instead of "+i+". Send the log file to the dev!\r\n");
-					writeLog("It appears we had to terminate early... Send the log file to the dev!\r\n");
+					consoleBox.append("It appears we had to terminate early, "+ x +" instead of "+i+". To help improve the software, email the logfile in \"C:\\elog (date).txt\" to eluosoftware@gmail.com\r\n");
+					writeLog("It appears we had to terminate early, "+ x +" instead of "+i+". To help improve the software, email the logfile in \"C:\\elog (date).txt\" to eluosoftware@gmail.com\r\n");
 				}
 				else if(!(btnExec.isVisible()) && admin == true)
 						consoleBox.append("\r\nFinished!\r\n");
@@ -1472,9 +1459,10 @@ public class Smgr
 				}*/
 				
 				progressBar.setValue(100);
+				uncheck();
 				btnExec.setVisible(true);
 				this.taskWipe();
-			}
+ 			}
 		}
 	};
 }

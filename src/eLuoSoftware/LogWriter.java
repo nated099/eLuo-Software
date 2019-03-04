@@ -17,8 +17,6 @@ import java.io.IOException;
 public class LogWriter{
 	int writeNum = 0;
 	
-
-	
 	public void Writer(String log, int num) 
 	{
 		

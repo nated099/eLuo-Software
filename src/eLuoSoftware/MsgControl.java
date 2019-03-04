@@ -34,7 +34,23 @@ public class MsgControl {
 		return control;
 		
 	}
-	
+	public int Restore(String line) {
+		int rID = 0;
+		String[] restore = line.split(" ", 0);
+		
+		if(line.indexOf("eLuo") != -1)
+		for(int i = 0; i < restore.length; i++) {
+			if(restore[i].equals("eLuo")) {
+				for(int x = 0; x < restore.length - i; x++) {
+				if(restore[i+x].matches("\\d+")) {
+					rID = Integer.parseInt(restore[i+x]);
+					break;
+				}
+			}
+		}
+		}
+		return rID;
+	}
 	public String Ret() {
 		return control;
 	}

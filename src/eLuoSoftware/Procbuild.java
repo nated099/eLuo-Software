@@ -19,7 +19,6 @@ public class Procbuild extends InputStream implements Runnable
 		ProcessBuilder cmdRun;
 		if(command.equalsIgnoreCase("admin.bat") || (command.indexOf("echo") != -1) || (command.indexOf("typeperf") != -1) || command.indexOf("reg add") != -1) {
 			cmdRun = new ProcessBuilder("cmd", "/c", command); 
-			System.out.println("cmd used");
 		}
 		else {
 			cmdRun = new ProcessBuilder("powershell", "-NonInteractive", command);
@@ -33,7 +32,7 @@ public class Procbuild extends InputStream implements Runnable
             out = p.getInputStream();
         }  
         catch(IOException e) {
-        	System.out.println("DEBUG: line 36 oops");
+        	System.out.println("DEBUG: line 35 procbuild oops");
         	return null;
         }
         return out;
@@ -52,7 +51,7 @@ public class Procbuild extends InputStream implements Runnable
             out = p.getInputStream();
         }  
         catch(IOException e) {
-        	System.out.println("DEBUG: line 55 oops");
+        	System.out.println("DEBUG: line 54 oops");
         	return null;
         }
         return out;
