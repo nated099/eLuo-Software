@@ -1,6 +1,4 @@
-https://sites.google.com/view/eluo/
-
-How to use (deployed version):
+How to use:
 
 1) Double click the "eLuo Software.exe" application
 2) Click the "execute" button to run as an administrator
@@ -15,7 +13,7 @@ Available Beta Features:
 
 
     Cleaning
-        Tune-up (Still in progress as well, however it performs a variety of maintenance tasks proven to help many struggling Windows 		Devices)
+        Tune-up (Still in progress as well, however it performs a variety of maintenance tasks proven to help many struggling Windows Devices)
         System Restore (Recommended and automatically selected with the tune-up process)
 
 
@@ -32,6 +30,17 @@ Available Beta Features:
         Microsoft Solitaire Collection
         Bing News
         Undo! (This feature will reinstall all the above in case you removed something that you want back)
+		
+	
+	Privacy
+		Disable Windows Telemetry
+		Disable Bing Search Suggestions
+		Disable Web Content Evaluation
+		Disable Windows Sync (Soon)
+		Disable Advertising
+		Disable WiFi Hotspot Sense
+		Disable P2P Windows Update downloads
+		Disable Smart Screen Data
 
 
 
@@ -43,4 +52,4 @@ Recommended Use:
 
 
 
-More to be added to the site, and the application soon!
+More to be added to this site, and the application soon!
